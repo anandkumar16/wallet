@@ -9,24 +9,30 @@ import { p2pTransfer } from "../app/lib/actions/p2pTransfer";
 export function SendCard() {
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState("");
-
-    return <div className="h-[90vh]">
-        <Center>
-            <Card title="Send">
-                <div className="min-w-72 pt-2">
-                    <TextInput placeholder={"Number"} label="Number" onChange={(value) => {
-                        setNumber(value)
-                    }} />
-                    <TextInput placeholder={"Amount"} label="Amount" onChange={(value) => {
-                        setAmount(value)
-                    }} />
-                    <div className="pt-4 flex justify-center">
-                        <Button onClick={async () => {
-                            await p2pTransfer(number, Number(amount) * 100)
-                        }}>Send</Button>
-                    </div>
-                </div>
-            </Card>
-        </Center>
-    </div>
+    return (
+        <div className="h-screen flex items-center justify-center bg-gray-50">
+            <div className="max-w-md w-full px-4">
+            <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
+                Transfer To Your Friend
+            </div>
+                <Center>
+                    <Card title="Send">
+                        <div className="p-6">
+                            <TextInput placeholder="Number" label="Number"  onChange={(value) => setNumber(value)} />
+                            <TextInput placeholder="Amount" label="Amount"  onChange={(value) => setAmount(value)} />
+                            <div className="pt-6 flex justify-center">
+                                <Button onClick={async () => {
+                                    await p2pTransfer(number, Number(amount) * 100);
+                                    setNumber("");
+                                    setAmount("");
+                                }} >
+                                    Send
+                                </Button>
+                            </div>
+                        </div>
+                    </Card>
+                </Center>
+            </div>
+        </div>
+    );
 }

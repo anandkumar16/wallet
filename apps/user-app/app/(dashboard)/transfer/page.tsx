@@ -15,7 +15,7 @@ async function getBalance() {
     return {
         amount: balance?.amount || 0,
         locked: balance?.locked || 0
-    }
+    };
 }
 
 async function getOnRampTransactions() {
@@ -30,27 +30,26 @@ async function getOnRampTransactions() {
         amount: t.amount,
         status: t.status,
         provider: t.provider
-    }))
+    }));
 }
 
-export default async function() {
+
+export default async function TransferToWallet() {
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
 
-    return <div className="w-screen">
-        <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
-            Transfer
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4">
-            <div>
-                <AddMoney />
-            </div>
-            <div>
-                <BalanceCard amount={balance.amount} locked={balance.locked} />
-                <div className="pt-4">
-                    <OnRampTransactions transactions={transactions} />
+   
+
+    return (
+        <div className="flex items-center justify-center min-h-screen w-full">
+            <div className="text-center">
+                <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
+                    Transfer To Your Wallet
+                </div>
+                <div className="p-4">
+                    <AddMoney />
                 </div>
             </div>
         </div>
-    </div>
+    );
 }
